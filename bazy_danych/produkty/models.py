@@ -1,5 +1,6 @@
 from django.db import models
-from użytkownicy.models import Użytkownicy
+from uzytkownicy.models import Uzytkownicy
+
 
 class Producenci:
     nazwa_producenta = models.CharField(max_length=100)
@@ -25,5 +26,6 @@ class Produkty:
 class Opinie:
     tresc = models.CharField(max_length=255)
     data_wystawienia = models.DateField(auto_created=True)
-    id_użytkownika = models.ForeignKey(Użytkownicy, on_delete=models.CASCADE)
+    id_uzytkownika = models.ForeignKey(Uzytkownicy, on_delete=models.CASCADE)
     id_produktu = models.OneToOneField(Produkty)
+    

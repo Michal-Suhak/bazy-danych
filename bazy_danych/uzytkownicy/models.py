@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Kontakty:
     telefon = models.CharField(max_length=12, null=True, blank=True)
     email = models.CharField(max_length=50, blank=True, null=True)
@@ -15,9 +16,8 @@ class Adresy:
     numer_lokalu = models.IntegerField(null=True, blank=True)
 
 
-class Użytkownicy:
+class Uzytkownicy:
     imie = models.CharField(max_length=50)
     nazwisko = models.CharField(max_length=50)
     id_kontaktu  = models.OneToOneField(Kontakty, on_delete=models.CASCADE)
     id_adresu = models.ForeignKey(Adresy, on_delete=models.CASCADE)
-
