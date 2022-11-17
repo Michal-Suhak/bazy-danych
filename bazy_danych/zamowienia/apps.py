@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ZamówieniaConfig(AppConfig):
+class ZamowieniaConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'zamówienia'
+    name = 'zamowienia'
