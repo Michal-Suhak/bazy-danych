@@ -1,5 +1,5 @@
 from django.db import models
-from uzytkownicy.models import Uzytkownicy
+from apps.uzytkownicy.models import Uzytkownicy
 
 
 class Producenci(models.Model):

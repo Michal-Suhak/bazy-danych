@@ -1,6 +1,6 @@
 from django.db import models
-from uzytkownicy.models import Uzytkownicy
-from produkty.models import Produkty
+from apps.uzytkownicy.models import Uzytkownicy
+from apps.produkty.models import Produkty
 
 
 class Zamowienia(models.Model):
