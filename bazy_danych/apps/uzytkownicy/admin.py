@@ -3,4 +3,7 @@ from .models import Uzytkownicy, Kontakty, Adresy
 
 admin.site.register(Kontakty)
 admin.site.register(Adresy)
-admin.site.register(Uzytkownicy)
+
+@admin.register(Uzytkownicy)
+class Uzytkownicy(admin.ModelAdmin):
+    list_display = ('email', 'imie', 'nazwisko')

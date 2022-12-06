@@ -20,7 +20,7 @@ class Uzytkownicy(AbstractBaseUser):
         return "{} {}".format(self.imie, self.nazwisko)
 
     def __str__(self):
-        return self.imie
+        return self.email
 
     def has_perm(self, perm, obj=None):
         """

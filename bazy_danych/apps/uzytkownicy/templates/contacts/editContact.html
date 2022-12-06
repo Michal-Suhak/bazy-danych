@@ -1,0 +1,22 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %} {% block content %}
+<h1>siema</h1>
+<div>
+  {% comment %} {% if user.is_authenticated %} {% endcomment %}
+  <div>
+    <form method="POST">
+      {% csrf_token %}
+      <div>
+        <label>Email:</label>
+        <input type="text" name="email" />
+        <label>Telefon:</label>
+        <input type="text" name="telefon" />
+      </div>
+      <div>
+        <button type="submit">edit</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% comment %} {% else %} {% endcomment %} {% comment %}
+<h1>You are not allowed</h1>
+{% endcomment %} {% comment %} {% endif %} {% endcomment %} {% endblock %}
