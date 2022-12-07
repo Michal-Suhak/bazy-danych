@@ -51,10 +51,10 @@ class Kontakty(models.Model):
 
 class Adresy(models.Model):
     id_uzytkownika = models.OneToOneField(Uzytkownicy, on_delete=models.CASCADE, null=True)
-    miejscowosc = models.CharField(max_length=70)
-    powiat = models.CharField(max_length=50)
-    wojewodztwo = models.CharField(max_length=50)
-    kod_pocztowy = models.CharField(max_length=6)
+    miejscowosc = models.CharField(max_length=70, blank=True)
+    powiat = models.CharField(max_length=50, blank=True)
+    wojewodztwo = models.CharField(max_length=50, blank=True)
+    kod_pocztowy = models.CharField(max_length=6, blank=True)
     ulica = models.CharField(max_length=70, null=True, blank=True)
-    numer_domu = models.IntegerField()
+    numer_domu = models.IntegerField(null=True, blank=True)
     numer_lokalu = models.IntegerField(null=True, blank=True)

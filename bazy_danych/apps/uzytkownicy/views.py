@@ -19,14 +19,35 @@ def editContact(request):
     contact, created = Kontakty.objects.get_or_create(
         id_uzytkownika = request.user
     )
-    form = ContactCreationEditForm(request.POST)
-    response = form.save(commit=False)
-    print(response.email)
-    if response.telefon or response.email:
-        contact.telefon = response.telefon
-        contact.email = response.email
+    response = ContactCreationEditForm(request.POST).save(commit=False)
+    form_values = list(response.__dict__.values())
+    for ind in range(1, len(form_values)):
+        if form_values[ind] != None:
+            contact.telefon = response.telefon
+            contact.email = response.email
     contact.save()
 
-    context = {'form': contact}
+    context = {'contact': contact}
 
-    return render(request, 'contacts/editContact.html', context)
+    return render(request, 'editContact.html', context)
+
+def editAddress(request):
+    address, created = Adresy.objects.get_or_create(
+        id_uzytkownika = request.user
+    )
+    response = ContactCreationEditForm(request.POST).save(commit=False)
+    form_values = list(response.__dict__.values())
+    for ind in range(1, len(form_values)):
+        if form_values[ind] != None:
+            address.miejscowosc = response.miejscowosc
+            address.powiat = response.powiat
+            address.wojewodztwo = response.wojewodztwo
+            address.kod_pocztowy = response.kod_pocztowy
+            address.ulica = response.ulica
+            address.numer_domu = response.numer_dommu
+            address.numer_lokalu = response.numer_lokalu
+    address.save()
+
+    context = {'address': address}
+
+    return render(request, 'editAddress.html', context)

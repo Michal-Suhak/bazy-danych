@@ -1,0 +1,26 @@
+<h1>siema</h1>
+<div>
+  <div>
+    <form method="POST">
+      {% csrf_token %}
+      <div>
+        <label>Miejscowosc:</label>
+        <input type="text" name="miejscowosc" />
+        <label>powiat:</label>
+        <input type="text" name="powiat" />
+        <label>wojewodztwo:</label>
+        <input type="text" name="wojewodztwo" />
+        <label>kod_pocztowy:</label>
+        <input type="text" name="kod_pocztowy" />
+        <label>ulica:</label>
+        <input type="text" name="ulica" />
+        <label>numer_dommu:</label>
+        <input type="text" name="numer_dommu" />
+        <label>numer_lokalu:</label>
+        <input type="text" name="numer_lokalu" />
+      <div>
+        <button type="submit">edit</button>
+      </div>
+    </form>
+  </div>
+</div>
