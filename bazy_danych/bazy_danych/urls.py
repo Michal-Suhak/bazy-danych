@@ -19,6 +19,7 @@ from apps.uzytkownicy.views import UserRegisterView
 
 urlpatterns = [
     path('uzytkownik/', include('apps.uzytkownicy.urls')),
+    path('produkty/', include('apps.produkty.urls')),
 
     path('admin/', admin.site.urls),
     path('register/', UserRegisterView.as_view(), name='register-user')
