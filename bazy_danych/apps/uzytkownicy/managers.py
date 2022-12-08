@@ -14,6 +14,7 @@ class UserManager(BaseUserManager):
         )
         user.set_password(password)
         user.save(using=self._db)
+
         return user
 
 
@@ -26,7 +27,8 @@ class UserManager(BaseUserManager):
             :type extra_fields: dict
         """
         extra_fields.setdefault('admin', False)
-        return self._create_user(email, password, imie, nazwisko, extra_fields)
+        extra_fields.setdefault('staff', False)
+        return self._create_user(email, password, imie, nazwisko, **extra_fields)
 
     def create_superuser(self, email, password, imie, nazwisko, **extra_fields):
         """

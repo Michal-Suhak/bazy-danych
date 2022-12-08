@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import UpdateView
 from .forms import UserChangeForm, UserCreationForm, ContactCreationEditForm 
@@ -6,8 +7,8 @@ from .models import Kontakty, Adresy
 
 class UserRegisterView(generic.CreateView):
     form_class = UserCreationForm
-    template_name = 'registration.html'
-    # success_url = reverse_lazy('login')       # move to login page ('login' its name in urls.py)
+    template_name = 'registration/registration.html'
+    success_url = reverse_lazy('login')       # move to login page ('login' its name in urls.py)
 
 
 class UserEditView(UpdateView):

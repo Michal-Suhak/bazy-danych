@@ -1,4 +1,8 @@
-{% comment %} {% extends 'base.html' %} {% endcomment %} {% block content %}
+{% extends 'base.html' %}
+
+{% block title %} Dodaj kontakt {% endblock title %}
+
+{% block page %}
 <h1>siema</h1>
 <div>
   {% comment %} {% if user.is_authenticated %} {% endcomment %}
@@ -19,4 +23,5 @@
 </div>
 {% comment %} {% else %} {% endcomment %} {% comment %}
 <h1>You are not allowed</h1>
-{% endcomment %} {% comment %} {% endif %} {% endcomment %} {% endblock %}
+{% endcomment %} {% comment %} {% endif %} {% endcomment %}
+{% endblock page%}

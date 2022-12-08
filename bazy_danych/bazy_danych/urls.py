@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from apps.uzytkownicy.views import UserRegisterView
+from django.contrib.auth import views as auth_views
+from apps.produkty.views import AllProductsView
 
 urlpatterns = [
     path('uzytkownik/', include('apps.uzytkownicy.urls')),
     path('produkty/', include('apps.produkty.urls')),
+    path('', AllProductsView.as_view(), name='home'),
 
     path('admin/', admin.site.urls),
-    path('register/', UserRegisterView.as_view(), name='register-user')
+    path('register/', UserRegisterView.as_view(), name='register-user'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+
 ]

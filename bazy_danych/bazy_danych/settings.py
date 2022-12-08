@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.produkty',
     'apps.uzytkownicy',
-    'apps.zamowienia'
+    'apps.zamowienia',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +128,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'uzytkownicy.Uzytkownicy'
+
+LOGIN_REDIRECT_URL = '/'

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Producenci {% endblock title %}
+
+{% block page %}
+
+<a href="{% url 'dodaj-kategorie' %}" class="btn btn-sm btn-outline-secondary">Dodaj nowegą kategorię <i class="fa-solid fa-circle-plus"></i> </a>
+
+{% for item in object_list%}
+    <p>{{ item.nazwa_kategorii }}</p>
+{% endfor %}
+{% endblock page %}

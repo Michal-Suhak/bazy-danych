@@ -8,8 +8,8 @@ class Uzytkownicy(AbstractBaseUser):
     imie = models.CharField(max_length=50)
     nazwisko = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
-    admin = models.BooleanField()
-    staff = models.BooleanField()
+    admin = models.BooleanField(null=True)
+    staff = models.BooleanField(null=True)
 
     REQUIRED_FIELDS = ['imie', 'nazwisko']
     USERNAME_FIELD = 'email' 

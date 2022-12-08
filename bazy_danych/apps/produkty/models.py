@@ -5,12 +5,16 @@ from apps.uzytkownicy.models import Uzytkownicy
 class Producenci(models.Model):
     nazwa_producenta = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.nazwa_producenta
+
+
 
 class Produkty(models.Model):
     nazwa = models.TextField(max_length=100)
     cena = models.DecimalField(decimal_places=2, max_digits=5)
     opis = models.TextField(max_length=255, null=True, blank=True)
-    zdjecie = models.ImageField()
+    #zdjecie = models.ImageField(null=True)
     id_producenta = models.ForeignKey(Producenci,on_delete=models.PROTECT)
 
 

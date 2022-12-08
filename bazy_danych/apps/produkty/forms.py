@@ -1,5 +1,5 @@
 from django import forms
-from .models import Producenci
+from .models import Producenci, Produkty, Kategorie
 
 
 class ManufacturerForm(forms.ModelForm):
@@ -10,3 +10,20 @@ class ManufacturerForm(forms.ModelForm):
         widgets = {
             'nazwa_producenta': forms.Textarea(attrs={'class': 'manufacturer_name_field'})
         }
+
+
+class ProductForm(forms.ModelForm):
+
+    class Meta:
+        model = Produkty
+        fields = {'nazwa', 'cena', 'opis', 'id_producenta'}
+        widgets = {
+            'nazwa': forms.Textarea(attrs={'class': 'product_name_field'})
+        }
+
+
+class CategoryForm(forms.ModelForm):
+
+    class Meta:
+        model = Kategorie
+        fields = {'nazwa_kategorii'}

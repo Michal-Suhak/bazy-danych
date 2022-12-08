@@ -1,3 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Producenci {% endblock title %}
+
+{% block page %}
+
+<a href="{% url 'dodaj-producenta' %}" class="btn btn-sm btn-outline-secondary">Dodaj nowego producenta <i class="fa-solid fa-circle-plus"></i> </a>
+
 {% for item in object_list%}
     <p>{{ item.nazwa_producenta }}</p>
 {% endfor %}
+{% endblock page %}
