@@ -1,5 +1,6 @@
+from datetime import date
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from .decorators import StaffRequiredMixin
 from .models import Producenci, Produkty, Kategorie
 from .forms import ManufacturerForm, ProductForm, CategoryForm
@@ -30,6 +31,10 @@ class ProductCreateView(StaffRequiredMixin, CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('lista-produktow')
 
+
+class PorductDetailsView(DetailView):
+    model = Produkty
+    template_name = 'product/productDetails.html'
 
 class AllCategoriesView(StaffRequiredMixin, ListView):
     model = Kategorie

@@ -4,7 +4,9 @@ from apps.produkty.models import Produkty
 
 
 class Zamowienia(models.Model):
+    id_uzytkownika = models.ForeignKey(Uzytkownicy, on_delete=models.PROTECT, default=None)
     data_zamowienia = models.DateField(auto_created=True)
+    zakonczone = models.BooleanField(default=False)
 
 
 class Szczegoly_zamowienia(models.Model):

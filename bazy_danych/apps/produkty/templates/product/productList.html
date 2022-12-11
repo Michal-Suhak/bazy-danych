@@ -11,6 +11,6 @@
 {% endif %}
 
 {% for item in object_list%}
-    <p>{{ item.id_producenta }} {{ item.nazwa }} {{ item.cena }} {{ item.opis }}</p>
+    <p>{{ item.id_producenta }} {{ item.nazwa }} {{ item.cena }} {{ item.opis }}</p> <a href="{% url 'detale-produktu' item.pk%}">Detale </a>
 {% endfor %}
 {% endblock page %}

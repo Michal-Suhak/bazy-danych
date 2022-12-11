@@ -18,14 +18,15 @@ from django.urls import path, include
 from apps.uzytkownicy.views import UserRegisterView
 from django.contrib.auth import views as auth_views
 from apps.produkty.views import AllProductsView
+from django.contrib.auth.views import LogoutView, LoginView
 
 urlpatterns = [
     path('uzytkownik/', include('apps.uzytkownicy.urls')),
     path('produkty/', include('apps.produkty.urls')),
-    path('', AllProductsView.as_view(), name='home'),
-
+    path('zamowienia/', include('apps.zamowienia.urls')),
     path('admin/', admin.site.urls),
+    path('', AllProductsView.as_view(), name='home'),
     path('register/', UserRegisterView.as_view(), name='register-user'),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
-
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout')
 ]
