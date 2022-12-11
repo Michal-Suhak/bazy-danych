@@ -1,8 +1,13 @@
-<p1>{{ object.id }}</p1>
-<p1>{{ object.cena }}</p1>
-<p1>{{ object.nazwa }}</p1>
+<p>{{ product.id }}</p>
+<p>{{ product.cena }}</p>
+<p>{{ product.nazwa }}</p>
 
-<form method="POST">
-  <input type="number" value="0" name="quantity" />
-  <input type="submit" value="Zamów" />
+{% if user.is_authenticated %}
+<form navigation method="POST">
+  {% csrf_token %}
+  <div>
+    <input type="number" value="0" name="quantity" min="0" />
+    <input type="submit" value="Zamów" />
+  </div>
 </form>
+{% endif %}

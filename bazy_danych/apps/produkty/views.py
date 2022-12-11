@@ -4,6 +4,9 @@ from django.views.generic import ListView, CreateView, DetailView
 from .decorators import StaffRequiredMixin
 from .models import Producenci, Produkty, Kategorie
 from .forms import ManufacturerForm, ProductForm, CategoryForm
+from django.shortcuts import render, redirect
+
+from apps.zamowienia.models import Zamowienia, Szczegoly_zamowienia
 
 
 class AllManufacturersView(StaffRequiredMixin, ListView):
@@ -32,9 +35,29 @@ class ProductCreateView(StaffRequiredMixin, CreateView):
     success_url = reverse_lazy('lista-produktow')
 
 
-class PorductDetailsView(DetailView):
-    model = Produkty
-    template_name = 'product/productDetails.html'
+# class ProductDetailsView(DetailView):
+#     model = Produkty
+#     template_name = 'product/productDetails.html'
+
+
+
+def make_order(request, pk):
+    item = Produkty.objects.get(id=pk)
+    if request.method == 'POST':
+        date_now = date.today()
+        zamowienie, _ = Zamowienia.objects.get_or_create(
+            id_uzytkownika = request.user,
+            data_zamowienia = date_now
+        )
+        print(zamowienie)
+        szczgoly_zamowienia = Szczegoly_zamowienia.objects.create(
+            ilosc=request.POST['quantity'],
+            id_zamowienia=zamowienie,
+            id_produktu=item
+        )
+    object = Produkty.objects.get(id=pk)
+    context = {'product': object}
+    return render(request, 'product/productDetails.html', context)
 
 class AllCategoriesView(StaffRequiredMixin, ListView):
     model = Kategorie

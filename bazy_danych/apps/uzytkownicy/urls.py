@@ -1,7 +1,7 @@
 from django.urls import path, include
-from .views import editContact, editAddress
+from .views import edit_contact, edit_address
 
 urlpatterns = [
-    path('kontakt/', editContact, name='kontakt'),
-    path('adres/', editAddress, name='adres')
+    path('kontakt/', edit_contact, name='kontakt'),
+    path('adres/', edit_address, name='adres')
 ]

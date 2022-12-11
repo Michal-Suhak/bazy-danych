@@ -16,7 +16,7 @@ class UserEditView(UpdateView):
     template_name = ''
 
 
-def editContact(request):
+def edit_contact(request):
     contact, created = Kontakty.objects.get_or_create(
         id_uzytkownika = request.user
     )
@@ -32,7 +32,7 @@ def editContact(request):
 
     return render(request, 'editContact.html', context)
 
-def editAddress(request):
+def edit_address(request):
     address, created = Adresy.objects.get_or_create(
         id_uzytkownika = request.user
     )
