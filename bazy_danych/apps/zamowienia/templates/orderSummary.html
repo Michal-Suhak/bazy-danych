@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block page %}
+{% for item in orders_list %}
+    <p>{{ item.id_produktu.nazwa }}</p>
+{% endfor %}
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" >Zatwierdź zamówienie</button>
+</form>
+{% endblock %}

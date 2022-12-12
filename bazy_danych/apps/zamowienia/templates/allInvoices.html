@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Produkty {% endblock title %}
+
+{% block page %}
+{% for item in object_list%}
+    <p>
+        {{ item.id_uzytkownika.id }} 
+        {{ item.id_zamowienia.id }} 
+        {{ item.kwota }} 
+        {{ item.data_wystawienia }}
+    </p> 
+{% endfor %}
+{% endblock page %}
