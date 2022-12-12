@@ -8,7 +8,7 @@ from .models import Kontakty, Adresy
 class UserRegisterView(generic.CreateView):
     form_class = UserCreationForm
     template_name = 'registration/registration.html'
-    success_url = reverse_lazy('login')       # move to login page ('login' its name in urls.py)
+    success_url = reverse_lazy('login')
 
 
 class UserEditView(UpdateView):
@@ -17,7 +17,7 @@ class UserEditView(UpdateView):
 
 
 def edit_contact(request):
-    contact, created = Kontakty.objects.get_or_create(
+    contact, _ = Kontakty.objects.get_or_create(
         id_uzytkownika = request.user
     )
     response = ContactCreationEditForm(request.POST).save(commit=False)
@@ -33,7 +33,7 @@ def edit_contact(request):
     return render(request, 'editContact.html', context)
 
 def edit_address(request):
-    address, created = Adresy.objects.get_or_create(
+    address, _ = Adresy.objects.get_or_create(
         id_uzytkownika = request.user
     )
     response = ContactCreationEditForm(request.POST).save(commit=False)

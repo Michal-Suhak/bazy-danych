@@ -3,9 +3,10 @@
 {% block title %} Dodaj produkt {% endblock title %}
 
 {% block page %}
-<form method="POST">
-  {% csrf_token %} {{form.as_p}}
+<form method="POST" novalidate>
+  {% csrf_token %}
+  {{ form.as_p }}
 
-  <button>Dodaj</button>
+  <button type="submit" >Dodaj</button>
 </form>
 {% endblock page %}

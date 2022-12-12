@@ -1,13 +1,12 @@
 from datetime import date
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView
 from .decorators import StaffRequiredMixin
 from .models import Producenci, Produkty, Kategorie
 from .forms import ManufacturerForm, ProductForm, CategoryForm
 from django.shortcuts import render, redirect
 
 from apps.zamowienia.models import Zamowienia, Szczegoly_zamowienia
-
 
 class AllManufacturersView(StaffRequiredMixin, ListView):
     model = Producenci
@@ -26,19 +25,18 @@ class AllProductsView(ListView):
     model = Produkty
     template_name = 'product/productList.html'
     ordering = ['-id']
+    
 
+def add_product(request):
+    form = ProductForm(request.POST or None)
+    
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('home')
 
-class ProductCreateView(StaffRequiredMixin, CreateView):
-    model = Produkty
-    template_name = 'product/productAdd.html'
-    form_class = ProductForm
-    success_url = reverse_lazy('lista-produktow')
-
-
-# class ProductDetailsView(DetailView):
-#     model = Produkty
-#     template_name = 'product/productDetails.html'
-
+    context = {'form': form}
+    return render(request, 'product/productAdd.html', context)
 
 
 def make_order(request, pk):
@@ -50,7 +48,7 @@ def make_order(request, pk):
             data_zamowienia = date_now
         )
         print(zamowienie)
-        szczgoly_zamowienia = Szczegoly_zamowienia.objects.create(
+        Szczegoly_zamowienia.objects.create(
             ilosc=request.POST['quantity'],
             id_zamowienia=zamowienie,
             id_produktu=item
