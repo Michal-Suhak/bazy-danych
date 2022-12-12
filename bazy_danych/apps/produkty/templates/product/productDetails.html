@@ -1,13 +1,19 @@
 <p>{{ product.id }}</p>
 <p>{{ product.cena }}</p>
 <p>{{ product.nazwa }}</p>
-
+{% if ordered %}
+  <p>Zamówiono</p>
+{% endif %}
 {% if user.is_authenticated %}
-<form navigation method="POST">
+<form navigation method="POST" >
   {% csrf_token %}
   <div>
     <input type="number" value="0" name="quantity" min="0" />
-    <input type="submit" value="Zamów" />
+    <input type="submit" value="Zamów" name="ADD" />
   </div>
+</form>
+<form method="POST" >
+  {% csrf_token %}
+  <input type="submit" value="Usuń" name="DELETE"/>
 </form>
 {% endif %}

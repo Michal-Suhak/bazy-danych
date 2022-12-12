@@ -12,7 +12,7 @@ class Zamowienia(models.Model):
 class Szczegoly_zamowienia(models.Model):
     ilosc = models.IntegerField()
     id_zamowienia = models.ForeignKey(Zamowienia, on_delete=models.PROTECT)
-    id_produktu = models.ForeignKey(Produkty, on_delete=models.PROTECT)
+    id_produktu = models.ForeignKey(Produkty, on_delete=models.CASCADE)
 
 
 class Faktury(models.Model):

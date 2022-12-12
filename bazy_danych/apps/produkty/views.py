@@ -39,9 +39,17 @@ def add_product(request):
     return render(request, 'product/productAdd.html', context)
 
 
-def make_order(request, pk):
-    item = Produkty.objects.get(id=pk)
-    if request.method == 'POST':
+def products_details(request, pk):
+    object = Produkty.objects.get(id=pk)
+    ordered = False
+
+    if request.method == 'POST' and "DELETE" in request.POST:
+        object.id_producenta = None
+        object.delete()
+        return redirect('home')
+
+
+    if request.method == 'POST' and "ADD" in request.POST:
         date_now = date.today()
         zamowienie, _ = Zamowienia.objects.get_or_create(
             id_uzytkownika = request.user,
@@ -51,10 +59,10 @@ def make_order(request, pk):
         Szczegoly_zamowienia.objects.create(
             ilosc=request.POST['quantity'],
             id_zamowienia=zamowienie,
-            id_produktu=item
+            id_produktu=object
         )
-    object = Produkty.objects.get(id=pk)
-    context = {'product': object}
+        ordered = True
+    context = {'product': object, 'ordered': ordered}
     return render(request, 'product/productDetails.html', context)
 
 class AllCategoriesView(StaffRequiredMixin, ListView):
