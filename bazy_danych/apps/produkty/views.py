@@ -53,7 +53,8 @@ def products_details(request, pk):
         date_now = date.today()
         zamowienie, _ = Zamowienia.objects.get_or_create(
             id_uzytkownika = request.user,
-            data_zamowienia = date_now
+            data_zamowienia = date_now,
+            zakonczone = False
         )
         print(zamowienie)
         Szczegoly_zamowienia.objects.create(
