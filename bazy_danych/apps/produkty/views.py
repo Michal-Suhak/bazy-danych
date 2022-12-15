@@ -1,7 +1,7 @@
 from datetime import date
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
-from .decorators import StaffRequiredMixin
+from .decorators import StaffRequiredMixin, staff_required
 from .models import Producenci, Produkty, Kategorie
 from .forms import ManufacturerForm, ProductForm, CategoryForm
 from django.shortcuts import render, redirect
@@ -26,7 +26,7 @@ class AllProductsView(ListView):
     template_name = 'product/productList.html'
     ordering = ['-id']
     
-
+@staff_required
 def add_product(request):
     form = ProductForm(request.POST or None)
     

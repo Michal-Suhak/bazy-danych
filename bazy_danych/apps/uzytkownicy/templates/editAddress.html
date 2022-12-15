@@ -1,4 +1,9 @@
-<h1>siema</h1>
+{% extends 'base.html' %}
+
+{% block title %} Dodaj kontakt {% endblock title %}
+
+{% block page %}
+  {% if user.is_authenticated %}
 <div>
   <div>
     <form method="POST">
@@ -23,3 +28,7 @@
     </form>
   </div>
 </div>
+{% else %}
+<h1>You are not allowed</h1>
+{% endif %}
+{% endblock page%}

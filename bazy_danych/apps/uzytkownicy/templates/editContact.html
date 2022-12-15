@@ -3,9 +3,8 @@
 {% block title %} Dodaj kontakt {% endblock title %}
 
 {% block page %}
-<h1>siema</h1>
 <div>
-  {% comment %} {% if user.is_authenticated %} {% endcomment %}
+  {% if user.is_authenticated %}
   <div>
     <form method="POST">
       {% csrf_token %}
@@ -21,7 +20,7 @@
     </form>
   </div>
 </div>
-{% comment %} {% else %} {% endcomment %} {% comment %}
+{% else %}
 <h1>You are not allowed</h1>
-{% endcomment %} {% comment %} {% endif %} {% endcomment %}
+{% endif %}
 {% endblock page%}
