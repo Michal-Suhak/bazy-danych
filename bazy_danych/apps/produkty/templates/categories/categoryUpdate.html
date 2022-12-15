@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %} Kategorie {% endblock title %}
+
+{% block page %}
+<form method="POST">
+  {% csrf_token %} {{form.as_p}}
+
+  <button>Zatwierdz</button>
+</form>
+{% endblock page %}

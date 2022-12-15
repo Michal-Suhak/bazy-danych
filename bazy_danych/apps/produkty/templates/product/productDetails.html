@@ -1,3 +1,8 @@
+{% extends 'base.html' %}
+
+{% block title %} Szczegoly produktu {% endblock title %}
+
+{% block page %}
 <p>{{ product.id }}</p>
 <p>{{ product.cena }}</p>
 <p>{{ product.nazwa }}</p>
@@ -13,7 +18,10 @@
   </div>
 </form>
 <form method="POST" >
+  {% endif %}
+  {% if user.is_staff %}
   {% csrf_token %}
   <input type="submit" value="Usuń" name="DELETE"/>
 </form>
 {% endif %}
+{% endblock page %}

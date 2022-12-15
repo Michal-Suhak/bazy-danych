@@ -1,12 +1,13 @@
 from datetime import date
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .decorators import StaffRequiredMixin, staff_required
 from .models import Producenci, Produkty, Kategorie
 from .forms import ManufacturerForm, ProductForm, CategoryForm
 from django.shortcuts import render, redirect
 
 from apps.zamowienia.models import Zamowienia, Szczegoly_zamowienia
+
 
 class AllManufacturersView(StaffRequiredMixin, ListView):
     model = Producenci
@@ -21,10 +22,25 @@ class ManufacturerCreateView(StaffRequiredMixin, CreateView):
     success_url = reverse_lazy('lista-producentow')
 
 
+class ManufacturerUpdateView(StaffRequiredMixin, UpdateView):
+    model = Producenci
+    fields = '__all__'
+    template_name = 'manufacturer/manufacturerUpdate.html'
+    success_url = reverse_lazy('lista-producentow')
+
+
+class ManufacturerDeleteView(StaffRequiredMixin, DeleteView):
+    model = Producenci
+    fields = '__all__'
+    template_name = 'manufacturer/manufacturerDelete.html'
+    success_url = reverse_lazy('lista-producentow')
+
+
 class AllProductsView(ListView):
     model = Produkty
     template_name = 'product/productList.html'
     ordering = ['-id']
+
     
 @staff_required
 def add_product(request):
@@ -76,4 +92,18 @@ class CategoryCreateView(StaffRequiredMixin, CreateView):
     model = Kategorie
     template_name = 'categories/categoryAdd.html'
     form_class = CategoryForm
+    success_url = reverse_lazy('lista-kategorii')
+
+
+class CategoryUpdateView(StaffRequiredMixin, UpdateView):
+    model = Kategorie
+    fields = '__all__'
+    template_name = 'categories/categoryUpdate.html'
+    success_url = reverse_lazy('lista-kategorii')
+
+
+class CategoryDeleteView(StaffRequiredMixin, DeleteView):
+    model = Kategorie
+    fields = '__all__'
+    template_name = 'categories/categoryDelete.html'
     success_url = reverse_lazy('lista-kategorii')
