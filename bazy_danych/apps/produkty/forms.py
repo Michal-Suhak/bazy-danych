@@ -1,5 +1,5 @@
 from django import forms
-from .models import Producenci, Produkty, Kategorie
+from .models import Producenci, Produkty, Kategorie, Opinie
 
 
 class ManufacturerForm(forms.ModelForm):
@@ -27,3 +27,11 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Kategorie
         fields = {'nazwa_kategorii'}
+
+
+
+class OpinionForm(forms.ModelForm):
+
+    class Meta:
+        model = Opinie
+        fields = {'tresc'}

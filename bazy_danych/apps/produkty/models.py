@@ -28,7 +28,7 @@ class Kategoria_produktu(models.Model):
 
 class Opinie(models.Model):
     tresc = models.CharField(max_length=255)
-    data_wystawienia = models.DateField(auto_created=True)
+    data_wystawienia = models.DateField(auto_now_add=True)
     id_uzytkownika = models.ForeignKey(Uzytkownicy, on_delete=models.CASCADE)
     id_produktu = models.ForeignKey(Produkty, on_delete=models.CASCADE)
     

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Dodaj opinion {% endblock title %}
+
+{% block page %}
+{% if user.is_authenticated %}
+<div>
+  <form method="POST">
+    {% csrf_token %}
+    {{ product.id }}
+    <div>
+      <label>Tresc:</label>
+      <input type="text" name="tresc" />
+    </div>
+    <div>
+      <button type="submit">Dodaj</button>
+    </div>
+  </form>
+</div>
+{% else %}
+<h1> Nie jesteś zalogowany </h1>
+{% endif %}
+{% endblock page %}
