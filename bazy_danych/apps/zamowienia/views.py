@@ -4,11 +4,13 @@ from apps.produkty.decorators import StaffRequiredMixin
 from .models import Faktury, Zamowienia, Szczegoly_zamowienia
 from datetime import date
 
-class AllInvoicesView(StaffRequiredMixin, ListView):
+class AllInvoicesView(ListView):
     model = Faktury
     template_name = 'allInvoices.html'
     ordering = ['-id']
 
+    def get_queryset(self):
+        return Faktury.objects.filter(id_uzytkownika=self.request.user)
 
 def overall_order(request):
     active_order = Zamowienia.objects.filter(id_uzytkownika=request.user, zakonczone=False)

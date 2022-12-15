@@ -81,7 +81,7 @@ def products_details(request, pk):
     context = {'product': object, 'ordered': ordered}
     return render(request, 'product/productDetails.html', context)
 
-class AllCategoriesView(StaffRequiredMixin, ListView):
+class AllCategoriesView(ListView):
     model = Kategorie
     template_name = 'categories/categoryList.html'
     ordering = ['-id']
