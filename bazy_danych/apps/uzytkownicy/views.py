@@ -1,9 +1,13 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import UpdateView
 from .forms import UserChangeForm, UserCreationForm, ContactCreationEditForm 
 from django.shortcuts import render
 from .models import Kontakty, Adresy
+from ..produkty.models import Opinie
+
 
 class UserRegisterView(generic.CreateView):
     form_class = UserCreationForm
@@ -52,3 +56,16 @@ def edit_address(request):
     context = {'address': address}
 
     return render(request, 'editAddress.html', context)
+
+@login_required
+def user_opinions(request):
+    opinions = Opinie.objects.filter(id_uzytkownika=request.user.pk)
+    context = {'opinions': opinions}
+    return render(request, 'userOpinionsList.html', context)
+
+
+class UserOpinionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Opinie
+    fields = ['tresc']
+    template_name = 'opinionUpdate.html'
+    success_url = reverse_lazy('home')

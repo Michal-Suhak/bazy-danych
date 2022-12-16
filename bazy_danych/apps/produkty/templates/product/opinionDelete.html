@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Kategorie {% endblock title %}
+
+{% block page %}
+Czy na pewno chcesz jego usunąć?
+<form method="POST">
+  {% csrf_token %} {{form.as_p}}
+
+  <button>Usuń jego</button>
+</form>
+{% endblock page %}

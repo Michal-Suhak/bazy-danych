@@ -1,10 +1,13 @@
 from datetime import date
+
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .decorators import StaffRequiredMixin, staff_required
 from .models import Producenci, Produkty, Kategorie, Opinie
 from .forms import ManufacturerForm, ProductForm, CategoryForm, OpinionForm
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from apps.zamowienia.models import Zamowienia, Szczegoly_zamowienia
 
@@ -58,6 +61,7 @@ def add_product(request):
 def products_details(request, pk):
     object = Produkty.objects.get(id=pk)
     ordered = False
+    opinions = Opinie.objects.filter(id_produktu=pk)
 
     if request.method == 'POST' and "DELETE" in request.POST:
         object.id_producenta = None
@@ -68,7 +72,7 @@ def products_details(request, pk):
     if request.method == 'POST' and "ADD" in request.POST:
         date_now = date.today()
         order, _ = Zamowienia.objects.get_or_create(
-            id_uzytkownika = request.user,
+            id_uzytkownika=request.user,
             data_zamowienia = date_now,
             zakonczone = False
         )
@@ -78,8 +82,9 @@ def products_details(request, pk):
             id_produktu=object
         )
         ordered = True
-    context = {'product': object, 'ordered': ordered}
+    context = {'product': object, 'ordered': ordered, 'opinions': opinions}
     return render(request, 'product/productDetails.html', context)
+
 
 class AllCategoriesView(ListView):
     model = Kategorie
@@ -108,14 +113,7 @@ class CategoryDeleteView(StaffRequiredMixin, DeleteView):
     success_url = reverse_lazy('lista-kategorii')
 
 
-def all_opinions(request, pk):
-    product = Produkty.objects.get(pk=pk)
-    opinions = Opinie.objects.filter(id_produktu=product)
-
-    context = {'opinions': opinions}
-    return render(request, 'product/opinionsList.html', context)
-
-
+@login_required
 def add_opinion(request, pk):
     product = Produkty.objects.get(pk=pk)
 
@@ -126,7 +124,21 @@ def add_opinion(request, pk):
             response.id_uzytkownika = request.user
             response.id_produktu = product
             response.save()
-            return redirect('lista-opinii', pk)
+            return redirect('detale-produktu', pk)
 
     context = {'product': product}
     return render(request, 'product/opinionAdd.html', context)
+
+
+class OpinionUpdateView(StaffRequiredMixin, UpdateView):
+    model = Opinie
+    fields = '__all__'
+    template_name = 'product/opinionUpdate.html'
+    success_url = reverse_lazy('home')
+
+
+class OpinionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Opinie
+    fields = '__all__'
+    template_name = 'product/opinionDelete.html'
+    success_url = reverse_lazy('home')

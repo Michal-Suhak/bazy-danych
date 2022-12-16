@@ -5,15 +5,11 @@
 {% block page %}
 {% if user.is_staff %}
 <a href="{% url 'dodaj-produkt' %}" class="btn btn-sm btn-outline-secondary">Dodaj nowy produkt <i class="fa-solid fa-circle-plus"></i> </a>
-{% elif user.is_authenticated %}
-{% else %}
-<a href="{% url 'login' %}" class="btn btn-sm btn-outline-secondary">Zaloguj <i class="fa-solid fa-circle-plus"></i> </a>
+
 {% endif %}
 
 {% for item in object_list%}
     <p>{{ item.id_producenta }} {{ item.nazwa }} {{ item.cena }} {{ item.opis }}</p>
     <a href="{% url 'detale-produktu' item.pk %}">Detale </a>
-    <a href="{% url 'dodaj-opinie' item.pk %}">Dodaj opinie </a>
-    <a href="{% url 'lista-opinii' item.pk %}">Opinie </a>
 {% endfor %}
 {% endblock page %}

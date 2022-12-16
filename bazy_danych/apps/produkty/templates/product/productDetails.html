@@ -4,6 +4,7 @@
 
 {% block page %}
 <p>{{ product.id }}</p>
+<p>{{ product.id_producenta }}</p>
 <p>{{ product.cena }}</p>
 <p>{{ product.nazwa }}</p>
 {% if ordered %}
@@ -18,10 +19,18 @@
   </div>
 </form>
 <form method="POST" >
+    <a href="{% url 'dodaj-opinie' product.pk %}">Dodaj opinie </a><br>
   {% endif %}
   {% if user.is_staff %}
   {% csrf_token %}
   <input type="submit" value="Usuń" name="DELETE"/>
 </form>
 {% endif %}
+{% for opinion in opinions%}
+    <p>{{ opinion.id_uzytkownika }} {{ opinion.data_wystawienia }} {{ opinion.tresc }}</p>
+    {% if user.is_staff %}
+    <a href="{% url 'edytuj-opinie' opinion.pk %}">Edytuj opinie </a>
+    <a href="{% url 'usun-opinie' opinion.pk %}">Usun opinie </a>
+    {% endif %}
+{% endfor %}
 {% endblock page %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Opinie {% endblock title %}
+
+{% block page %}
+
+{% for opinion in opinions%}
+    <p>{{ opinion.data_wystawienia }} {{ opinion.tresc }}</p>
+    {% if user.is_staff %}
+    <a href="{% url 'edytuj-opinie' opinion.pk %}">Edytuj opinie </a>
+    {% elif user.is_authenticated %}
+    <a href="{% url 'edytuj-opinie-uzytkownika' opinion.pk %}">Edytuj opinie </a>
+    {% endif %}
+    <a href="{% url 'usun-opinie' opinion.pk %}">Usun opinie </a>
+{% endfor %}
+{% endblock page %}
