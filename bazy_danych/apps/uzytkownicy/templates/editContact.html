@@ -2,24 +2,29 @@
 
 {% block title %} Dodaj kontakt {% endblock title %}
 
+{% block head%}
+<style>
+  input {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 5px;
+  }
+</style>
+
+{% endblock head %}
+
 {% block page %}
-<div>
   {% if user.is_authenticated %}
-  <div>
-    <form method="POST">
+  <div style="width: 100%; display: flex; justify-content: center; margin-top: 30px;">
+    <form method="POST" style="display: flex; flex-direction: column; width: 20%;">
       {% csrf_token %}
-      <div>
         <label>Email:</label>
-        <input type="text" name="email" />
+        <input type="text" name="email"/>
         <label>Telefon:</label>
-        <input type="text" name="telefon" />
-      </div>
-      <div>
-        <button type="submit">edit</button>
-      </div>
+        <input type="text" name="telefon"/>
+        <button type="submit" class="btn btn-info w-50 mt-3">edit</button>
     </form>
   </div>
-</div>
 {% else %}
 <h1>You are not allowed</h1>
 {% endif %}

@@ -8,9 +8,9 @@ class UserCreationForm(UserCreationForm):
         model = Uzytkownicy
         fields = ('email', 'imie', 'nazwisko')
         widgets = {
-            'email': forms.TextInput(attrs={'class': 'email_input'}),
-            'imie': forms.TextInput(attrs={'class': 'imie_input'}),
-            'nazwisko': forms.TextInput(attrs={'class': 'nazwisko_input'})
+            'email': forms.TextInput(attrs={'class': 'email_input form-control'}),
+            'imie': forms.TextInput(attrs={'class': 'imie_input form-control'}),
+            'nazwisko': forms.TextInput(attrs={'class': 'nazwisko_input form-control'})
         }
 
 
@@ -20,9 +20,9 @@ class UserChangeForm(forms.ModelForm):
         model = Uzytkownicy
         fields = ('email', 'imie', 'nazwisko')
         widgets = {
-            'email': forms.TextInput(attrs={'class': 'email_input'}),
-            'imie': forms.TextInput(attrs={'class': 'imie_input'}),
-            'nazwisko': forms.TextInput(attrs={'class': 'nazwisko_input'})
+            'email': forms.TextInput(attrs={'class': 'email_input form-control'}),
+            'imie': forms.TextInput(attrs={'class': 'imie_input form-control'}),
+            'nazwisko': forms.TextInput(attrs={'class': 'nazwisko_input form-control'})
         }
 
 
@@ -32,6 +32,6 @@ class ContactCreationEditForm(forms.ModelForm):
         model = Kontakty
         fields = {'telefon', 'email'}
         widgets = {
-            'telefon': forms.TextInput(attrs={'class': 'phone_input'}),
-            'email': forms.EmailInput(attrs={'class': 'email_input'})
+            'telefon': forms.TextInput(attrs={'class': 'phone_input form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'email_input form-control'})
         }

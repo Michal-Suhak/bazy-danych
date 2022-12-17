@@ -5,7 +5,7 @@ from django.views import generic
 from django.views.generic import UpdateView
 from .forms import UserChangeForm, UserCreationForm, ContactCreationEditForm 
 from django.shortcuts import render
-from .models import Kontakty, Adresy
+from .models import Kontakty, Adresy, Uzytkownicy
 from ..produkty.models import Opinie
 
 
@@ -17,7 +17,11 @@ class UserRegisterView(generic.CreateView):
 
 class UserEditView(UpdateView):
     form_class = UserChangeForm
-    template_name = ''
+    template_name = 'registration/registration.html'
+    
+    def get_queryset(self):
+        breakpoint()
+        return Uzytkownicy.objects.get(pk = self.request.user.pk)
 
 
 def edit_contact(request):

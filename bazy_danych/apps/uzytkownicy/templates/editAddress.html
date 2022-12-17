@@ -2,15 +2,24 @@
 
 {% block title %} Dodaj kontakt {% endblock title %}
 
+{% block head%}
+<style>
+  input {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 5px;
+  }
+</style>
+
+{% endblock head %}
+
 {% block page %}
   {% if user.is_authenticated %}
-<div>
-  <div>
-    <form method="POST">
+  <div style="width: 100%; display: flex; justify-content: center; margin-top: 30px;">
+    <form method="POST" style="display: flex; flex-direction: column; width: 20%;">
       {% csrf_token %}
-      <div>
         <label>Miejscowosc:</label>
-        <input type="text" name="miejscowosc" />
+        <input type="text" name="miejscowosc"/>
         <label>powiat:</label>
         <input type="text" name="powiat" />
         <label>wojewodztwo:</label>
@@ -23,11 +32,9 @@
         <input type="text" name="numer_dommu" />
         <label>numer_lokalu:</label>
         <input type="text" name="numer_lokalu" />
-        <button type="submit">edit</button>
-      </div>
+        <button type="submit" class="btn btn-info w-50 mt-3">Edytuj</button>
     </form>
   </div>
-</div>
 {% else %}
 <h1>You are not allowed</h1>
 {% endif %}

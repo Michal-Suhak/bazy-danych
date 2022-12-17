@@ -4,12 +4,15 @@
 
 {% block page %}
 
-<a href="{% url 'dodaj-kategorie' %}" class="btn btn-sm btn-outline-secondary">Dodaj nową kategorię <i class="fa-solid fa-circle-plus"></i> </a>
+<div class="m-3">
 
-{% for item in object_list%}
-    <p>{{ item.nazwa_kategorii }}</p>
+    <a class="btn btn-info" href="{% url 'dodaj-kategorie' %}" class="btn btn-sm btn-outline-secondary">Dodaj nową kategorię <i class="fa-solid fa-circle-plus"></i> </a>
+    
+    {% for item in object_list%}
+    <p><b>Nazwa Kategorii: </b>{{ item.nazwa_kategorii }}</p>
     {% csrf_token %}
-    <a href="{% url 'edytuj-kategorie' item.id %} " class="btn btn-sm btn-outline-secondary">Edytuj</a>
-    <a href="{% url 'usun-kategorie' item.id %} " class="btn btn-sm btn-outline-secondary">Usuń</a>
-{% endfor %}
+    <a class="btn btn-info" href="{% url 'edytuj-kategorie' item.id %} " class="btn btn-sm btn-outline-secondary">Edytuj</a>
+    <a class="btn btn-info" href="{% url 'usun-kategorie' item.id %} " class="btn btn-sm btn-outline-secondary">Usuń</a>
+    {% endfor %}
+</div>
 {% endblock page %}

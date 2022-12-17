@@ -1,12 +1,28 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block page %}
+<div style="display: flex; justify-content: center; margin: 30px;">
+  <div style="display: flex; flex-direction: column; margin-right: 35px;">
+    {% for item in orders_list %}
+    <div
+      style="
+        border: 1px solid gray;
+        border-radius: 5px;
+        margin: 10px;
+        padding: 10px;
+      "
+    >
+      <p><b>Nazwa produktu: </b>{{ item.id_produktu.nazwa }}</p>
+      <p><b>Cena Produktu: </b>{{ item.id_produktu.cena }} <b> PLN</b></p>
+    </div>
+    {% endfor %}
+  </div>
 
-{% block page %}
-{% for item in orders_list %}
-    <p>{{ item.id_produktu.nazwa }}</p>
-{% endfor %}
+  <div style="margin: 5px; margin-left: 35px;">
+    <p><b>Suma: </b>{{ sum }} <b> PLN</b></p>
+    <form method="POST">
+      {% csrf_token %}
+      <button class="btn btn-info" type="submit">Zatwierdź zamówienie</button>
+    </form>
+  </div>
+</div>
 
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit" >Zatwierdź zamówienie</button>
-</form>
 {% endblock %}

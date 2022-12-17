@@ -18,6 +18,10 @@ def overall_order(request):
 
     if active_order:
         orders_list = Szczegoly_zamowienia.objects.filter(id_zamowienia__in=active_order)
+        sum = 0
+        for i in orders_list:
+            sum += i.id_produktu.cena;
+        
 
         if request.method == 'POST':
             for item in orders_list:
@@ -31,7 +35,7 @@ def overall_order(request):
             active_order.update(zakonczone=True)
             return redirect('home')
 
-        context = {'orders_list': orders_list, 'active_order': active_order}
+        context = {'orders_list': orders_list, 'active_order': active_order, 'sum': sum}
         return render(request, 'orderSummary.html', context)
 
     

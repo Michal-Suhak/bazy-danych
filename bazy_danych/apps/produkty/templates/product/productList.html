@@ -1,15 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'listStyles.css' %}" />
+{% endblock head %} {% block title %} Produkty {% endblock title %} 
+{% block page %} 
 
-{% block title %} Produkty {% endblock title %}
-
-{% block page %}
 {% if user.is_staff %}
-<a href="{% url 'dodaj-produkt' %}" class="btn btn-sm btn-outline-secondary">Dodaj nowy produkt <i class="fa-solid fa-circle-plus"></i> </a>
-
+<a href="{% url 'dodaj-produkt' %}" class="btn btn-info m-3"
+  >Dodaj nowy produkt <i class="fa-solid fa-circle-plus"></i>
+</a>
 {% endif %}
+<div class="tableWrapper">
+  <table>
+    <tr>
+      <th>Nazwa Producenta</th>
+      <th>Nazwa Produktu</th>
+      <th>Cena</th>
+      <th></th>
+    </tr>
 
-{% for item in object_list%}
-    <p>{{ item.id_producenta }} {{ item.nazwa }} {{ item.cena }} {{ item.opis }}</p>
-    <a href="{% url 'detale-produktu' item.pk %}">Detale </a>
-{% endfor %}
+    {% for item in object_list %}
+    <tr>
+      <td>{{ item.id_producenta }}</td>
+      <td>{{ item.nazwa }}</td>
+      <td>{{ item.cena }} PLN</td>
+      <td><a class="btn btn-info" href="{% url 'detale-produktu' item.pk %}">Detale </a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
 {% endblock page %}

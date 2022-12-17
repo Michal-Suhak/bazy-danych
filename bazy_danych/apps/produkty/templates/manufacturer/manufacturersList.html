@@ -4,11 +4,13 @@
 
 {% block page %}
 
-<a href="{% url 'dodaj-producenta' %}" class="btn btn-sm btn-outline-secondary">Dodaj nowego producenta <i class="fa-solid fa-circle-plus"></i> </a>
-
-{% for item in object_list%}
-    <p>{{ item.nazwa_producenta }}</p>
-    <a href="{% url 'edytuj-producenta' item.id %} " class="btn btn-sm btn-outline-secondary">Edytuj</a>
-    <a href="{% url 'usun-producenta' item.id %} " class="btn btn-sm btn-outline-secondary">Usuń</a>
-{% endfor %}
+<div class="m-3">
+    <a class="btn btn-info" href="{% url 'dodaj-producenta' %}" class="btn btn-sm btn-outline-secondary">Dodaj nowego producenta <i class="fa-solid fa-circle-plus"></i> </a>
+    
+    {% for item in object_list%}
+    <p><b>Nazwa Producenta: </b>{{ item.nazwa_producenta }}</p>
+    <a class="btn btn-info" href="{% url 'edytuj-producenta' item.id %} " class="btn btn-sm btn-outline-secondary">Edytuj</a>
+    <a class="btn btn-info" href="{% url 'usun-producenta' item.id %} " class="btn btn-sm btn-outline-secondary">Usuń</a>
+    {% endfor %}
+</div>
 {% endblock page %}

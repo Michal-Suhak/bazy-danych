@@ -1,14 +1,30 @@
-{% extends 'base.html' %}
-
-{% block title %} Produkty {% endblock title %}
-
+{% extends 'base.html' %}{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'listStyles.css' %}" />
+{% endblock head %} {% block title %} Faktury {% endblock title %} 
 {% block page %}
-{% for item in object_list%}
-    <p>
-        {{ item.id_uzytkownika.id }} 
-        {{ item.id_zamowienia.id }} 
-        {{ item.kwota }} 
-        {{ item.data_wystawienia }}
-    </p> 
-{% endfor %}
+<div class="tableWrapper">
+    <table>
+        <tr>
+            <th>Numer Faktury</th>
+            <th>Numer Zamówienia</th>
+            <th>Produkty</th>
+            <th>Kwota</th>
+            <th>Data</th>
+        </tr>
+        {% for item in object_list%}
+        <tr>
+            <td>{{ item.id_uzytkownika.id }}</td>
+            <td>{{ item.id_zamowienia.id }}</td>
+            <td>
+                {% for produkt in item.id_produktu %}
+                {{produkt.nazwa}}
+                {% endfor %}
+            </td>
+            <td>{{ item.kwota }} <b>PLN</b></td>
+            <td>{{item.data_wystawienia }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock page %}

@@ -11,11 +11,18 @@
       rel="stylesheet"
       crossorigin="anonymous"
     />
+    {% block head%} {% endblock %}
 
     <title>{% block title%} {% endblock %}</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav
+      class="navbar navbar-expand-lg"
+      style="
+        background-color: rgb(230, 249, 250);
+        border-bottom: 1px solid gray;
+      "
+    >
       <div class="container-fluid">
         <a class="navbar-brand" href="/produkty/lista-produktow/">Home</a>
         <button
@@ -33,35 +40,42 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if user.is_staff %}
             <li class="nav-item">
-              <a class="nav-link" href="/produkty/lista-producentow/">Producenci</a>
+              <a class="nav-link" href="/produkty/lista-producentow/"
+                >Producenci</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/produkty/lista-kategorii/">Kategorie</a>
+              <a class="nav-link" href="/produkty/lista-kategorii/"
+                >Kategorie</a
+              >
             </li>
-            {% endif %}
-            {% if user.is_authenticated %}
+            {% endif %} {% if user.is_authenticated %}
             <li class="nav-item">
-            <a class="nav-link" href="/zamowienia/zamowienie/">Aktualne zamówienie</a>
+              <a class="nav-link" href="/zamowienia/zamowienie/"
+                >Aktualne zamówienie</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/zamowienia/faktury/">Faktury</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/uzytkownik/opinie-uzytkownika/">Moje opinie</a>
+              <a class="nav-link" href="/uzytkownik/opinie-uzytkownika/"
+                >Moje opinie</a
+              >
             </li>
-             <li class="nav-item">
-               <a class="nav-link" href="/uzytkownik/adres/">Edytuj adres</a>
-             </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/uzytkownik/kontakt/">Edytuj kontakt</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout/">Wyloguj</a>
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/uzytkownik/adres/">Edytuj adres</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/uzytkownik/kontakt/">Edytuj kontakt</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout/">Wyloguj</a>
+            </li>
             {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="/login/">Zaloguj</a>
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login/">Zaloguj</a>
+            </li>
             {% endif %}
           </ul>
         </div>

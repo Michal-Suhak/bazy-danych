@@ -1,20 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %} Dodaj opinion {% endblock title %}
+{% block title %} Dodaj opinię {% endblock title %}
 
 {% block page %}
 {% if user.is_authenticated %}
 <div>
-  <form method="POST">
+  <form method="POST" class="m-3" style="display: flex; flex-direction: column; width: 15%;">
+    <h3>Dodaj Opinię</h3>
     {% csrf_token %}
-    {{ product.id }}
-    <div>
       <label>Tresc:</label>
-      <input type="text" name="tresc" />
-    </div>
-    <div>
-      <button type="submit">Dodaj</button>
-    </div>
+      <textarea name="tresc" ></textarea>
+      <button class="btn btn-info mt-2" type="submit">Dodaj</button>
   </form>
 </div>
 {% else %}

@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 
-{% block title %} Kategorie {% endblock title %}
+{% block title %} Edytuj opinię {% endblock title %}
+{% block head%}
+<style>
+  input, select{
+    padding: 5px;
+    margin-top: 5px;
+  }
+</style>
+{% endblock head %}
 
 {% block page %}
-<form method="POST">
-  {% csrf_token %} {{form.as_p}}
+<form method="POST" class="m-3" style="display: flex; flex-direction: column; width: 15%;">
+  <h3>Edytuj Opinię</h3>
+  {% csrf_token %} {{form}}
 
-  <button>Zatwierdz</button>
+  <button class="btn btn-info mt-2">Zatwierdz</button>
 </form>
 {% endblock page %}

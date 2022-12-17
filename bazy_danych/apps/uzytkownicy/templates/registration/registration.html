@@ -1,5 +1,11 @@
-<form method="POST">
-    {% csrf_token %} 
-    {{form.as_p}}
-    <button>Zarejestruj się</button>
-</form>
+{% extends 'base.html' %}
+{% block title%} Register {% endblock %}
+
+{% block page %}
+<div style="display: flex; justify-content: center; margin: 20px;">
+    <form method="POST" style="width: 30%;">
+        {% csrf_token %} {{form.as_p}}
+        <button class="btn btn-info">Zarejestruj się</button>
+    </form>
+</div>
+{% endblock %}

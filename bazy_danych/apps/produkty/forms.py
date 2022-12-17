@@ -8,7 +8,7 @@ class ManufacturerForm(forms.ModelForm):
         model = Producenci
         fields = {'nazwa_producenta'}
         widgets = {
-            'nazwa_producenta': forms.Textarea(attrs={'class': 'manufacturer_name_field'})
+            'nazwa_producenta': forms.TextInput(attrs={'class': 'manufacturer_name_field'})
         }
 
 
@@ -18,7 +18,8 @@ class ProductForm(forms.ModelForm):
         model = Produkty
         fields = {'nazwa', 'cena', 'opis', 'id_producenta'}
         widgets = {
-            'nazwa': forms.Textarea(attrs={'class': 'product_name_field'})
+            'nazwa': forms.TextInput(attrs={'class': 'product_name_field'}),
+            'opis':forms.TextInput(attrs={'class': 'product_description_field'})
         }
 
 
