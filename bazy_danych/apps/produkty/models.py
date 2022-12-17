@@ -16,6 +16,8 @@ class Produkty(models.Model):
     opis = models.TextField(max_length=255, null=True, blank=True)
     id_producenta = models.ForeignKey(Producenci, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return self.nazwa
 
 class Kategorie(models.Model):
     nazwa_kategorii = models.CharField(max_length=70)

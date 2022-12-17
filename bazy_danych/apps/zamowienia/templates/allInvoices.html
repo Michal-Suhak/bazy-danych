@@ -12,17 +12,19 @@
             <th>Kwota</th>
             <th>Data</th>
         </tr>
-        {% for item in object_list%}
+        {% for invoice in invoices %}
         <tr>
-            <td>{{ item.id_uzytkownika.id }}</td>
-            <td>{{ item.id_zamowienia.id }}</td>
+            <td>{{ invoice.id }}</td>
+            <td>{{ invoice.id_zamowienia_id }}</td>
             <td>
-                {% for produkt in item.id_produktu %}
-                {{produkt.nazwa}}
+                {% for product in invoice.products%}
+                {{ product.id_produktu}} | ilość:
+                {{ product.ilosc}}
+                <br>
                 {% endfor %}
             </td>
-            <td>{{ item.kwota }} <b>PLN</b></td>
-            <td>{{item.data_wystawienia }}</td>
+            <td>{{ invoice.kwota }} <b>PLN</b></td>
+            <td>{{invoice.data_wystawienia }}</td>
         </tr>
         {% endfor %}
     </table>

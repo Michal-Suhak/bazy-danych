@@ -18,19 +18,19 @@
   <div style="width: 100%; display: flex; justify-content: center; margin-top: 30px;">
     <form method="POST" style="display: flex; flex-direction: column; width: 20%;">
       {% csrf_token %}
-        <label>Miejscowosc:</label>
+        <label>Miejscowość:</label>
         <input type="text" name="miejscowosc"/>
-        <label>powiat:</label>
+        <label>Powiat:</label>
         <input type="text" name="powiat" />
-        <label>wojewodztwo:</label>
+        <label>Województwo:</label>
         <input type="text" name="wojewodztwo" />
-        <label>kod_pocztowy:</label>
+        <label>Kod pocztowy:</label>
         <input type="text" name="kod_pocztowy" />
-        <label>ulica:</label>
+        <label>Ulica:</label>
         <input type="text" name="ulica" />
-        <label>numer_dommu:</label>
-        <input type="text" name="numer_dommu" />
-        <label>numer_lokalu:</label>
+        <label>Numer domu:</label>
+        <input type="text" name="numer_domu" />
+        <label>Numer lokalu:</label>
         <input type="text" name="numer_lokalu" />
         <button type="submit" class="btn btn-info w-50 mt-3">Edytuj</button>
     </form>

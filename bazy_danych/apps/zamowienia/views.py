@@ -1,17 +1,25 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
-from apps.produkty.decorators import StaffRequiredMixin
 from .models import Faktury, Zamowienia, Szczegoly_zamowienia
 from datetime import date
 
-class AllInvoicesView(ListView):
-    model = Faktury
-    template_name = 'allInvoices.html'
-    ordering = ['-id']
+@login_required
+def all_invoices(request):
+    invoices = Faktury.objects.filter(id_uzytkownika=request.user.pk).values()
+    new_invoices = []
+    for i in range(invoices.count()):
+        order = invoices[i].get('id_zamowienia_id')
+        products = Szczegoly_zamowienia.objects.filter(id_zamowienia=order)
+        new_invoices.append({'id': invoices[i].get('id'),
+                             'id_zamowienia_id': invoices[i].get('id_zamowienia_id'),
+                             'kwota': invoices[i].get('kwota'),
+                             'data_wystawienia': invoices[i].get('data_wystawienia'),
+                            'products': products})
 
-    def get_queryset(self):
-        return Faktury.objects.filter(id_uzytkownika=self.request.user)
+    context = {'invoices': new_invoices}
+    return render(request, 'allInvoices.html', context)
 
+@login_required
 def overall_order(request):
     active_order = Zamowienia.objects.filter(id_uzytkownika=request.user, zakonczone=False)
     total_cost = 0

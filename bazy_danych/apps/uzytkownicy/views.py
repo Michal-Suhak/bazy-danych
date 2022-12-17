@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import UpdateView
@@ -24,6 +25,7 @@ class UserEditView(UpdateView):
         return Uzytkownicy.objects.get(pk = self.request.user.pk)
 
 
+@login_required
 def edit_contact(request):
     contact, _ = Kontakty.objects.get_or_create(
         id_uzytkownika = request.user
@@ -40,6 +42,7 @@ def edit_contact(request):
 
     return render(request, 'editContact.html', context)
 
+@login_required
 def edit_address(request):
     address, _ = Adresy.objects.get_or_create(
         id_uzytkownika = request.user

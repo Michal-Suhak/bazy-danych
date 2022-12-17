@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import AllInvoicesView, overall_order
+from .views import overall_order, all_invoices
 
 urlpatterns = [
-    path('faktury/', AllInvoicesView.as_view(), name='faktury'),
+    path('faktury/', all_invoices, name='faktury'),
     path('zamowienie/', overall_order, name='zamowienie')
 ]
