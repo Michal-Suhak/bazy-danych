@@ -1,11 +1,11 @@
-{% extends 'base.html' %} {% block title %} Szczegoly produktu 
-{% endblock title %} {% block page %}
-<div style="display: flex; justify-content: space-evenly; margin-top: 50px;">
-  <div style="display: flex; flex-direction: column">
+{% extends 'base.html' %} {% block title %} Szczegoly produktu {% endblock title%} {% block page %}
+<div style="display: flex; justify-content: space-evenly; margin-top: 50px">
+  <div style="display: flex; flex-direction: column; width: 15%;">
     <div>
       <p><b>Producent: </b>{{ product.id_producenta }}</p>
       <p><b>Cena: </b>{{ product.cena }}</p>
       <p><b>Nazwa Produktu: </b>{{ product.nazwa }}</p>
+      <p><b>Opis: </b>{{product.opis}}</p>
     </div>
     {% if ordered %}
     <p>Zamówiono</p>
@@ -13,11 +13,11 @@
     <form navigation method="POST">
       {% csrf_token %}
       <input
-      style="padding: 5px; border-radius: 5px; border: 1px solid gray;"
-      type="number"
-      value="1"
-      name="quantity"
-      min="1"
+        style="padding: 5px; border-radius: 5px; border: 1px solid gray"
+        type="number"
+        value="1"
+        name="quantity"
+        min="1"
       /><br />
       <input class="btn btn-info mt-3" type="submit" value="Zamów" name="ADD" />
     </form>
@@ -25,25 +25,33 @@
     <form method="POST">
       {% csrf_token %}
       <input
-      class="btn btn-info mt-2 mb-2"
-      type="submit"
-      value="Usuń Produkt"
-      name="DELETE"
+        class="btn btn-info mt-2 mb-2"
+        type="submit"
+        value="Usuń Produkt"
+        name="DELETE"
       />
     </form>
     {% endif %}
   </div>
-  <div style="width: 20%;">
+  <div style="width: 20%">
     {% if user.is_authenticated %}
     <a class="btn btn-info mt-2 mb-2" href="{% url 'dodaj-opinie' product.pk %}"
       >Dodaj opinie </a
     ><br />
     {% endif %} {% for opinion in opinions%}
-    <p><b>Użytkownik: </b>{{ opinion.id_uzytkownika }} <b>Data: </b> {{ opinion.data_wystawienia }}</p>
+    <p>
+      <b>Użytkownik: </b>{{ opinion.id_uzytkownika }} <b>Data: </b> {{opinion.data_wystawienia }}
+    </p>
     <p>{{opinion.tresc }}</p>
     {% if user.is_staff %}
-    <a class="btn btn-info mt-2 mb-2" href="{% url 'edytuj-opinie' opinion.pk %}">Edytuj opinie </a>
-    <a class="btn btn-info mt-2 mb-2" href="{% url 'usun-opinie' opinion.pk %}">Usun opinie </a>
+    <a
+      class="btn btn-info mt-2 mb-2"
+      href="{% url 'edytuj-opinie' opinion.pk %}"
+      >Edytuj opinie
+    </a>
+    <a class="btn btn-info mt-2 mb-2" href="{% url 'usun-opinie' opinion.pk %}"
+      >Usun opinie
+    </a>
     {% endif %} {% endfor %} {% endblock page %}
   </div>
 </div>
