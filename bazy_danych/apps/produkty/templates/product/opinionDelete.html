@@ -5,9 +5,9 @@
 {% block page %}
 <form method="POST" class="m-3" style="display: flex; flex-direction: column; width: 15%;">
   <h3>Usuń opinię</h3>
-  <p>Czy na pewno chcesz jego usunąć?</p>
+  <p>Czy na pewno chcesz usunąć opinię?</p>
   {% csrf_token %} {{form.as_p}}
 
-  <button class="btn btn-info mt-2 w-50">Usuń jego</button>
+  <button class="btn btn-info mt-2 w-50">Usuń</button>
 </form>
 {% endblock page %}
